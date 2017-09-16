@@ -1,1 +1,79 @@
-/home/ian/.config/i3/config
+#Set default Mod Key
+set $mod Mod1
+
+#Set Workspace Names
+set $ws1_m1 "1:web"
+set $ws1_m2 "2:dev"
+set $ws2_m1 "3:term"
+set $ws2_m2 "4:chat"
+set $ws2_m3 "5:music"
+
+#Set workspace monitor locations
+workspace $ws1_m1 output DP-4
+workspace $ws1_m2 output DP-4
+workspace $ws2_m1 output HDMI-0
+workspace $ws2_m2 output HDMI-0
+workspace $ws2_m3 output HDMI-0
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1_m1
+bindsym $mod+2 workspace $ws1_m2
+bindsym $mod+3 workspace $ws2_m1
+bindsym $mod+4 workspace $ws2_m2
+bindsym $mod+5 workspace $ws2_m3
+
+# move focused container
+bindsym $mod+Shift+1 move container to workspace $ws1_m1
+bindsym $mod+Shift+2 move container to workspace $ws1_m2
+bindsym $mod+Shift+3 move container to workspace $ws2_m1
+bindsym $mod+Shift+4 move container to workspace $ws2_m2
+bindsym $mod+Shift+5 move container to workspace $ws2_m3
+
+#Assign apps to workspaces
+assign [class="Firefox"] $ws1_m1
+assign [class="^URxvt$" instance="^urxvt$"] $ws2_m1
+assign [class="^URxvt$" instance="^irssi$"] $ws2_m2
+assign [class="^URxvt$" instance="^ncmpcpp$"] $ws2_m3
+
+#Automatically start core applications on startup
+exec_always --no-startup-id urxvt -name ncmpcpp -e ncmpcpp
+exec_always --no-startup-id urxvt -name irssi -e /usr/local/bin/zsh -c "tmux new-session irssi"
+
+#Fonts
+font pango:monospace 8
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# fullscreen window
+bindsym $mod+f fullscreen toggle
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec --no-startup-id dmenu_run
+exec_always feh --bg-fill /home/ian/Pictures/wallhaven-103658.jpg
+
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Alt_R focus left
+bindsym $mod+Super_R focus down
+bindsym $mod+Print focus up
+
+bar {
+	status_command i3status
+}
