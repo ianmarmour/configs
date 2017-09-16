@@ -39,6 +39,8 @@ assign [class="^URxvt$" instance="^ncmpcpp$"] $ws2_m3
 exec_always --no-startup-id urxvt -name ncmpcpp -e ncmpcpp
 exec_always --no-startup-id urxvt -name irssi -e /usr/local/bin/zsh -c "tmux new-session irssi"
 
+#Git test
+
 #Fonts
 font pango:monospace 8
 
